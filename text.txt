@@ -1,0 +1,86 @@
+Using Marpit markdown in marp, organize my text so that it fits correctly and makes sense as a presentation so if I have too much text or its too vague then add or subtract detail as necessary to get my informative goal across to the reader.  
+
+Hello and welcome to my short workship on how to get quickly started with generating a frontend website for your smart contract code. This is primarily for anything that uses walletconnect so any evm smart contract based blockchain, dag, etc.. will work with this! 
+
+The essential tools you need to get started are: Vscode from microsoft, a special directory just for development of frontends,  github desktop, and node with npm. If you already have git cli and are comfortable with it then this won't apply to you. 
+
+Once those are downloaded and ready, you want to start a cmd pane on your computer and "cd .." into the correct folder. Once you are there then start the command with npm init wagmi --template next-web3modal 
+
+Before moving on! Do npm i -g wagmi to update wagmi to the next version. Sometimes this is unnecessary as wagmi will install with the next command, but I've had issues with this in the past so I recommend this as a precaution. 
+
+Follow the instructions, make sure to select nextjs, and click the link it gives for wallet connect and sign in with your wallet(or email), create a project and copy paste the project-ID into the command line prompt. Finally let it load and cd into next-web3modal folder.
+
+Now go to your github and add the existing repo that was now just generated, in this case I believe it should open as a create new repo which is fine. Set the settings to whatever works best for you. 
+
+Now you can open the the repo in the view tab or if there are no commits then it should be able to be opened straight from the menu. Now you will be in the vscode folder with all the correct files. Go to your terminal in vscode and close the old one. Now run the command "npm install"
+
+After letting that load; run "npm run dev" and after a few seconds a website server will be generated for you to open on your browser and view your newly created website! You can then connect to it using the wallet connect and see all the different functions it has to offer. 
+
+Now to make this into a production website to share with your friends and family you have got to disable Linting as otherwise you will stopped every time since you forgot to set the exact correct type, etc... There will just be alot of errors initially and since we are treating this like a hackathon in which we are in a hurry I recommend just skipping eslint until the very end where if you have some time you can have it point out your errors. 
+To disable linting put this in your next.config.js
+`module.exports = {
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+}`
+
+Now to get some styling, I reccomend getting tailwindcss setup
+To do that you need to create a globals.css in the /src/app file 
+Then in your layout.tsx add the import "./globls.css"; to the top. 
+Now type in the command line: `npm install -D tailwindcss postcss autoprefixer` Wait for it to load and then `npx tailwindcss init -p` 
+
+Now go to your tailwind.config.ts and input 
+`/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+ 
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}`
+
+Now go to your globals.css file and add `@tailwind base;
+@tailwind components;
+@tailwind utilities;`
+
+Finally kill the running server(if you still do) and re run it!
+Now in the app folder go to page.tsx and in the return area add this code here: 
+`    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>` If the text is bold and underline then you know that your tailwindcss was installed correctly!
+
+Now we move on to the last part in style, style packs!
+
+Go to your commandline and type `npm i -D daisyui@latest`
+
+Then in your tailwind.config.ts, right in your plugins add: `plugins: [require("daisyui")],`
+
+Now go back to where you put that h1 tag and add this code here: 
+`<button className="btn btn-primary">Primary</button>`
+
+If it worked then now you have daisy ui running! 
+
+With this you can now begin work on your site and upload it to vercel. 
+
+To upload to vercel you go to the vercel.com website. 
+
+Log in and add your github account
+
+Give it permission for all your repos. 
+
+Got to add new project and import your git repo
+
+make sure it sees your nextjs file structure, it its not auto picking nextjs then select the start to be in the src folder(that can sometimes mess it up). 
+
+Submit/finish and let it run. If the linting was disabled correctly(but at this stage there should be no linting errors anyway) then it should build the site with no problem and after a few minutes give you a website link for you to enjoy!
+
+Thank you for following along, if you have any questions feel free to ask me and I will be able to give clarification and assist you!
